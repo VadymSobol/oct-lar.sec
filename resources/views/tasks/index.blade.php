@@ -60,6 +60,14 @@
 				<i class="fa fa-trash"></i> Удалить   
 			</form>
 		    </td>
+		    <td>
+			<form action="{{url('tasks/'.$task->id)}}" method="get">
+			{{csrf_field()}}
+			{{method_field('get')}}
+			<button type="submit" class="btn btn-default bg-default">
+			    <i class="fa fa-edit"></i> Редактировать
+			</form>
+		    </td>
 		</tr>
 		@endforeach
 	    </tbody>
