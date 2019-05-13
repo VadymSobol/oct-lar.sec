@@ -5,7 +5,7 @@
     <!-- Отображение ошибок проверки ввода -->
     @include('common.errors')
     <!-- Форма новой задачи -->
-    <form action="{{ url('tasks') }}" method="POST" class="form-horizontal">
+    <form action="{{ route('tasks_store') }}" method="POST" class="form-horizontal">
 	{{ csrf_field() }}
 
 	<!-- Имя задачи -->
@@ -40,7 +40,8 @@
 	    <thead>
 		<tr>
 		    <th>Задача</th>
-		    <th>Действие</th>
+                    <th colspan="2">Действие</th>
+                    
 		</tr>
 	    </thead>
 	    <!-- Тело таблицы -->
@@ -52,21 +53,16 @@
 			<div>{{ $task->name }}</div>
 		    </td>
 		    <td>
-			<form action="{{url('tasks/'.$task->id)}}" method="post">
+			<form action="{{route('tasks_destroy',$task->id)}}" method="post">
 			    {{csrf_field()}}
 			    {{method_field('delete')}}
 			    
 			    <button type="submit" class="btn btn-default bg-danger">
-				<i class="fa fa-trash"></i> Удалить   
+                                <i class="fa fa-trash"></i> Удалить</button>
 			</form>
 		    </td>
 		    <td>
-			<form action="{{url('tasks/'.$task->id)}}" method="get">
-			{{csrf_field()}}
-			{{method_field('get')}}
-			<button type="submit" class="btn btn-default bg-default">
-			    <i class="fa fa-edit"></i> Редактировать
-			</form>
+                        <a href="{{route('tasks_edit', $task->id)}}" class="btn btn-default bg-warning"><i class="fa fa-edit"></i>Редактировать</a>
 		    </td>
 		</tr>
 		@endforeach
